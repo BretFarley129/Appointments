@@ -1,0 +1,25 @@
+<h1>Doctor's Appointments</h1>
+<h1>Hello {{user}}</h1>
+<a [routerLink]="['/logout']">logout</a>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Patient Name</th>
+    <th>Complaint</th>
+  </tr>
+  <tr *ngFor="let x of appointments">
+    <td>{{x.date}}</td>
+    <td>{{x.time}}</td>
+    <td>{{x.patient}}</td>
+    <td>
+      <span>{{x.complaint}}</span>
+      <button [routerLink]="['/delete',x]" *ngIf="x.patient == user && x.date > tomorrow">Cancel</button>
+    </td>
+  </tr>
+</table>
+<br>
+
+<button [routerLink]="['/new_appointment']"
+style="color:white; background-color:blue"> Add a New Appointment</button>

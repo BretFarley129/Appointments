@@ -1,0 +1,29 @@
+This is a dummy express server setup designed to save time when setting up MEAN stack projects.
+
+Any time this is copied to be implemented into a new project,
+you need to run all npm commands:
+    npm init -y
+    npm install express --save
+    npm install body-parser --save
+    npm install path --save
+    npm install mongoose --save
+
+In addition to this, all of the Files need to be altered:
+
+    server.js: check DB name.
+        -not sure if the line is necessary but if it aint 
+        broke don't fix it
+    
+    mongoose.js: edit DB name
+
+    routes.js:
+        -change routes names
+        -change function names depending on controllers
+    
+    controllers and models:
+        -copy both thing.js files as needed to match the number
+         of models that you will be using.
+        -change file names from thing.js otherwise you will be
+         confuse.
+        -change variable names within the files base on what I 
+        wrote in there and you're good to go.

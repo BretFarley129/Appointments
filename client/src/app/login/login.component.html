@@ -1,0 +1,7 @@
+<h1>Doctor's Appoinments</h1>
+<form (submit)='onSubmit()'>
+  Name: <input type="text" name="user" required minlength="3" [(ngModel)]="user.name" #name="ngModel" >
+  <input type="submit" value="Enter" *ngIf="name.valid">
+  <input type="submit" disabled="true" value="Enter" *ngIf="!name.valid">
+</form>
+<p style='color:red' *ngIf="!name.valid">Name must be 3 letters</p>
