@@ -15,6 +15,17 @@ export class ApiService {
   getUser(){
     return this.user;
   }
+  cancel(id){
+    console.log('attempting to delete entry');
+    this._http.put(`/cancel/${id}`, id).subscribe(
+      data =>{
+        console.log("success!");
+      },
+      err =>{
+        console.log('something went wrong')
+      }
+    )
+  }
 
   addAppointment(appointment){
     console.log('attempting to add new entry');

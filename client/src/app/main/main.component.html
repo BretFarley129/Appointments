@@ -1,6 +1,6 @@
-<h1>Doctor's Appointments</h1>
-<h1>Hello {{user}}</h1>
+<h1>Hello {{user}}!</h1>
 <a [routerLink]="['/logout']">logout</a>
+<h1>Doctor's Appointments:</h1>
 
 <table>
   <tr>
@@ -15,7 +15,9 @@
     <td>{{x.patient}}</td>
     <td>
       <span>{{x.complaint}}</span>
-      <button [routerLink]="['/delete',x]" *ngIf="x.patient == user && x.date > tomorrow">Cancel</button>
+      <form (submit)="onSubmit(x._id)">
+        <button [routerLink]="['/delete',x]" *ngIf="x.patient == user && x.date > tomorrow">Cancel</button>
+      </form>
     </td>
   </tr>
 </table>

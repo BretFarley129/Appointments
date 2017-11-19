@@ -14,28 +14,44 @@ export class MainComponent implements OnInit {
   day = new Date;
   constructor(private _apiService: ApiService, private route: Router) { }
 
-  ngOnInit() {
-    this.day.setDate(this.day.getDate()+1);
-    this.day.setMonth(this.day.getMonth()+1);
-    this.tomorrow =String(this.day.getFullYear())+'-'+String(this.day.getMonth())+'-'+ String(this.day.getDate())
-    console.log(String(this.day.getFullYear())+'-'+String(this.day.getMonth())+'-'+ String(this.day.getDate()));
-    this.user = this._apiService.getUser();
+  onSubmit(id){
+    this._apiService.cancel(id);
     this._apiService.getAppointments().subscribe(
       (data)=> {
-        console.log(data.json());
         this.appointments = data.json();
         for (var i = 0; i < this.appointments.length; i++){
-          console.log(this.appointments[i]['date']);
-          console.log(this.tomorrow);
           this.appointments[i]['check'] = this.appointments[i]['date'] > this.tomorrow;
-          console.log(this.appointments[i]['check']);
         }
       },
       (err)=>{
         console.log(err)
       }
     )
-    console.log(this.appointments)
+  }
+
+  ngOnInit() {
+    this.day.setDate(this.day.getDate()+1);
+    this.day.setMonth(this.day.getMonth()+1);
+    this.tomorrow =String(this.day.getFullYear())+'-'+String(this.day.getMonth())+'-'+ String(this.day.getDate())
+    this.user = this._apiService.getUser();
+    this._apiService.getAppointments().subscribe(
+      (data)=> {
+        this.appointments = data.json().sort(function(a,b){
+          var B =new Date(b.date)
+          var A = new Date(a.date)
+          return A > B;
+        })
+        this.day.setDate(this.day.getDate()-1);
+        // for (var i in this.appointments){
+        //   if(this.appointments[i] < this.day){
+            
+        //   }
+        // }
+      },
+      (err)=>{
+        console.log(err)
+      }
+    )
   }
 
 }
